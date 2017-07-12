@@ -10,6 +10,7 @@ require('../bootstrap');
 
 import MenuLeft from './components/MenuLeft.vue';
 import IndexPage from './components/index.vue';
+import PageList from './components/pageList.vue';
 
 const router = new VueRouter({
 	mode: 'history',
@@ -18,6 +19,12 @@ const router = new VueRouter({
 			path: '/admin/',
 			name: 'index',
 			component: IndexPage
+		},
+		{
+			path: '/admin/pages/:code?',
+			components:{
+				pages: PageList
+			}
 		}
 	]
 });

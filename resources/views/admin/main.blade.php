@@ -10,6 +10,7 @@
 
     <link href="{{asset('asset/css/normalize.css')}}" rel="stylesheet" />
     <link href="{{asset('asset/css/font-awesome.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
     <link href="{{asset('asset/admin/css/components.css')}}" rel="stylesheet" />
     <link href="{{asset('asset/admin/css/main.css')}}" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,8 +63,9 @@
             </div>
         </header>
         <section class="content_bar">
-            <div class="col-xs-9">
-            </div>
+           <div id="main_content">
+                <router-view name="pages"></router-view>
+           </div>
         </section>
     </div>
 </div>

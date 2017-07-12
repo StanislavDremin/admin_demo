@@ -31,7 +31,7 @@ if (!config.resolve.hasOwnProperty('modules')) {
 	config.resolve = Object.assign({}, config.resolve, {
 		modules: [
 			path.join(__dirname, 'custom_module', 'js'),
-			'node_modules'
+			path.join(__dirname, 'node_modules'),
 		]
 	})
 }

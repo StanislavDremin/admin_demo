@@ -214,6 +214,7 @@ header .profile .fa-angle-down {
 
 .sidebar {
 	flex: 2;
+	min-width: 190px;
 }
 
 .section_content {
