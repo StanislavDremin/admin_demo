@@ -1,23 +1,21 @@
 <template>
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-		<div class="menu_section">
+		<div class="menu_section active">
 			<h3>Контент</h3>
-			
-			<el-collapse v-model="activeName" accordion class="nav side-menu">
-				<el-collapse-item title="Consistency" name="1">
-					<template slot="title">
-						<a href="javascript:"><i class="fa fa-home"></i> Структура страниц </a>
-					</template>
+			<ul class="nav side-menu">
+				<li class="active">
+					<a @click.prevent="openSubMenu">
+						<i class="fa fa-home"></i> Структура <span class="fa fa-chevron-down"></span>
+					</a>
 					<ul class="nav child_menu">
-						<li class="current-page">
-							<router-link to="/admin/pages">Страницы</router-link>
-						</li>
+						<router-link tag="li" to="/admin/pages" active-class="current-page">
+							<a>Страницы</a>
+						</router-link>
 					</ul>
-				</el-collapse-item>
-				<el-collapse-item title="Feedback" name="2">
-					<template slot="title">
-						<a><i class="fa fa-home"></i> Home2 </a>
-					</template>
+				</li>
+				<li>
+					<a @click.prevent="openSubMenu" class="open_submenu"><i class="fa fa-edit"></i>
+						Forms <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 						<li><a href="form.html">General Form</a></li>
 						<li><a href="form_advanced.html">Advanced Components</a></li>
@@ -26,18 +24,84 @@
 						<li><a href="form_upload.html">Form Upload</a></li>
 						<li><a href="form_buttons.html">Form Buttons</a></li>
 					</ul>
-				</el-collapse-item>
-			</el-collapse>
+				</li>
+			</ul>
+		</div>
+		<div class="menu_section">
+			<h3>Live On</h3>
+			<ul class="nav side-menu">
+				<li>
+					<a @click.prevent="openSubMenu" class="open_submenu"><i class="fa fa-bug"></i>
+						Additional Pages <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="e_commerce.html">E-commerce</a></li>
+						<li><a href="projects.html">Projects</a></li>
+						<li><a href="project_detail.html">Project Detail</a></li>
+						<li><a href="contacts.html">Contacts</a></li>
+						<li><a href="profile.html">Profile</a></li>
+					</ul>
+				</li>
+				<li>
+					<a @click.prevent="openSubMenu" class="open_submenu"><i class="fa fa-windows"></i>
+						Extras <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="page_403.html">403 Error</a></li>
+						<li><a href="page_404.html">404 Error</a></li>
+						<li><a href="page_500.html">500 Error</a></li>
+						<li><a href="plain_page.html">Plain Page</a></li>
+						<li><a href="login.html">Login Page</a></li>
+						<li><a href="pricing_tables.html">Pricing Tables</a></li>
+					</ul>
+				</li>
+				<li>
+					<a @click.prevent="openSubMenu" class="open_submenu"><i class="fa fa-sitemap"></i>
+						Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="#level1_1">Level One</a>
+						</li>
+						<li><a>Level One<span class="fa fa-chevron-down"></span></a>
+							<ul class="nav child_menu">
+								<li class="sub_menu"><a href="level2.html">Level Two</a>
+								</li>
+								<li><a href="#level2_1">Level Two</a>
+								</li>
+								<li><a href="#level2_2">Level Two</a>
+								</li>
+							</ul>
+						</li>
+						<li><a href="#level1_2">Level One</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<i class="fa fa-laptop"></i>
+						Landing Page <span class="label label-success pull-right">Coming Soon</span>
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
 <script>
-	import { Collapse } from 'element-ui'
-	
 	export default {
-		data(){
-			return {
-				activeName: '1'
+		mounted(){
+		},
+
+		methods: {
+			openSubMenu(ev){
+				const $item = $(ev.currentTarget).parent();
+				const $subMenu = $item.find('> .child_menu');
+				if ($subMenu.length > 0) {
+					if ($item.hasClass('active')) {
+						$subMenu.slideUp(200, function () {
+							$item.removeClass('active');
+						});
+					} else {
+						$subMenu.slideDown(200, function () {
+							$item.addClass('active');
+						});
+					}
+				}
 			}
 		}
 	}
@@ -49,17 +113,17 @@
 		list-style: none;
 		margin-top: 10px;
 	}
+	
 	.nav.side-menu > li.active, .nav.side-menu > li.current-page {
 		border-right: 5px solid #1ABB9C;
 	}
-	li.active .child_menu {
-		display: block;
-	}
+	
 	.nav.side-menu > li {
 		position: relative;
 		display: block;
 		cursor: pointer;
 	}
+	
 	.side-menu > li.active > a, .side-menu > li > a:hover {
 		text-shadow: rgba(0, 0, 0, .25) 0 -1px 0;
 		background: linear-gradient(#334556, #2C4257), #2A3F54;
@@ -82,7 +146,7 @@
 	}
 	
 	.child_menu {
-		display: block;
+		display: none
 	}
 	
 	.nav.child_menu > li > a, .nav.side-menu > li > a {
@@ -104,23 +168,23 @@
 	}
 	
 	.child_menu li {
-		padding-left: 30px;
+		padding-left: 36px;
 	}
 	
 	.child_menu > li > a {
 		color: #fff;
 		font-size: 12px;
-		padding: 7px;
+		padding: 9px;
 		font-weight: 500;
 		text-decoration: none !important;
 	}
 	
-	.side-menu .child_menu li:before {
+	.side-menu > li .child_menu li:before {
 		background: #425668;
 		bottom: auto;
 		content: "";
 		height: 8px;
-		left: 17px;
+		left: 23px;
 		margin-top: 15px;
 		position: absolute;
 		right: auto;
@@ -129,22 +193,23 @@
 		border-radius: 50%;
 	}
 	
-	.side-menu .child_menu > li:after {
+	.side-menu > li > .child_menu > li:after {
 		border-left: 1px solid #425668;
+		bottom: 0;
 		content: "";
-		left: 20px;
+		left: 27px;
 		position: absolute;
-		margin-top: -44px;
-		box-sizing: border-box;
-		height: 48px;
+		top: 45px;
 	}
+	
 	li.current-page, .child_menu li:hover {
-		background: rgba(255,255,255,.05);
+		background: rgba(255, 255, 255, .05);
 	}
 	
 	.menu_section {
 		margin-bottom: 35px;
 	}
+	
 	.menu_section h3 {
 		padding-left: 15px;
 		color: #fff;
@@ -157,44 +222,7 @@
 		text-shadow: 1px 1px #000;
 	}
 	
-	.menu_section .el-collapse {
-		border: none;
-		background: none;
-	}
-	.menu_section .el-collapse-item__wrap {
-		background: none;
-		border: none;
-	}
-	.menu_section .el-collapse-item__header__arrow {
-		float: right;
-		margin-right: 15px;
-		font-size: 80%;
-		margin-top: 18px;
-	}
-	
-	.menu_section .el-collapse-item__header {
-		border-bottom: none;
-		background: none;
-		color: #E7E7E7 !important;
-		border-top: none;
-	}
-	
-	.menu_section .el-collapse-item__content {
-		padding: 0;
-	}
-	.menu_section .is-active .el-collapse-item__header {
-		text-shadow: rgba(0, 0, 0, .25) 0 -1px 0;
-		background: linear-gradient(#334556, #2C4257), #2A3F54;
-		box-shadow: rgba(0, 0, 0, .25) 0 1px 0, inset rgba(255, 255, 255, .16) 0 1px;
-		color: #E7E7E7 !important;
-		border-top: none;
-		border-bottom: none;
-	}
-	.menu_section .is-active .el-collapse-item__header > a,
-	.menu_section .el-collapse-item__header > a{
-		color: #E7E7E7 !important;
-	}
-	.menu_section .el-collapse-item.is-active {
-		border-right: 5px solid #1ABB9C;
+	.menu_section .active .child_menu {
+		display: block;
 	}
 </style>

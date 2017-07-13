@@ -13,13 +13,9 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import Example from './components/Example.vue';
 
 $(function () {
 	const app = new Vue({
 		el: '#admin_content',
-		components: {
-			Example
-		}
 	});
 });

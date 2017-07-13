@@ -19,10 +19,18 @@ Route::group(
 		Route::get('/', function () {
 			return view('admin/main', ['title' => 'Админка']);
 		});
-		Route::group(['prefix' => 'page'], function () {
-			Route::get('/', ['uses' => 'Admin\PageCtrl@exec', 'as' => 'pages']);
-			Route::get('/add', ['uses' => 'Admin\PageCtrl@addPage', 'as' => 'pages'])->name('page_form');
+		Route::get('/pages', ['uses' => 'Admin\PageSectionsCtrl@sectionList', 'as' => 'sectionList']);
+
+		Route::group(['prefix' => 'rest', 'middleware' => 'rest'],  function (){
+			Route::group(['prefix' => 'sections'], function (){
+				Route::get('/heads', 'Admin\PageSectionsCtrl@getColumns');
+				Route::get('/items', 'Admin\PageSectionsCtrl@getSections');
+			});
 		});
+//		Route::group(['prefix' => 'page'], function () {
+//			Route::get('/', ['uses' => 'Admin\PageCtrl@exec', 'as' => 'pages']);
+//			Route::get('/add', ['uses' => 'Admin\PageCtrl@addPage', 'as' => 'pages'])->name('page_form');
+//		});
 	}
 );
-Auth::routes();
+//Auth::routes();

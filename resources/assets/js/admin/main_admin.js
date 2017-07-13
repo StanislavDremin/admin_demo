@@ -11,6 +11,13 @@ require('../bootstrap');
 import MenuLeft from './components/MenuLeft.vue';
 import IndexPage from './components/index.vue';
 import PageList from './components/pageList.vue';
+import Rest from 'Rest';
+
+Vue.use(Rest, {
+	rest: {
+		baseURL: '/admin/rest',
+	}
+});
 
 const router = new VueRouter({
 	mode: 'history',
@@ -32,7 +39,8 @@ const router = new VueRouter({
 const AdminWrap = new Vue({
 	router,
 	components: {
-		MenuLeft
+		MenuLeft,
+		PageList
 	}
 });
 

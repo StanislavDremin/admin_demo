@@ -21,6 +21,7 @@ Encore
 
 	.enableSourceMaps(false)
 	.setManifestKeyPrefix('public/')
+	.enableLessLoader()
 // create hashed filenames (e.g. app.abc123.css)
 // .enableVersioning()
 ;
